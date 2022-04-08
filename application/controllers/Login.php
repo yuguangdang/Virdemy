@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// this is to test github
 class login extends CI_Controller {
 
     public function __construct() {
