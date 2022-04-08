@@ -1,0 +1,102 @@
+body {
+  font-size: 0.8rem;
+}
+
+.main {
+  background-color: #E1EEDD;
+  height: 100vh;
+}
+
+.button {
+  height: 1.5rem;
+  background-color: #2e5e4e;
+  color: #f6c453;
+  border-radius: 3px;
+  border-color: #2e5e4e;
+  box-shadow: none;
+}
+
+.button:hover {
+  background-color: #f6c453;
+  color: #2e5e4e;
+  border-color: #f6c453;
+}
+
+.navbar {
+  background-color: #fefbe9;
+  justify-content: space-between;
+  display: flex;
+}
+
+.navbar div {
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  color: #2e5e4e !important;
+  font-weight: bolder;
+  text-shadow: 1px 1px 1px #b2dabc, 1px 2px 1px #bcdab2, 1px 3px 1px #bcdab2,
+    1px 4px 1px #bcdab2, 1px 5px 1px #bcdab2, 
+    1px 5px 6px rgba(16, 16, 16, 0.5), 1px 6px 7px rgba(16, 16, 16, 0.5);
+  font-family: "ZCOOL KuaiLe", cursive;
+  font-size: 1.2rem;
+}
+
+.form-control {
+  height: 1.5rem;
+}
+
+.nav-item {
+  margin-right: 1rem;
+}
+
+
+/****************** Login style *******************/
+
+.login_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../img/background.webp");
+	background-size:cover;
+  height: 100%;
+}
+
+.login_box {
+  width: 40%;
+  border: 2px solid #2e5e4e;
+  border-radius: 10px;
+  background-color: rgb(225, 238, 221, 0.95);
+}
+
+.login_box form {
+  padding: 1rem;
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
+}
+
+.login_box form button {
+  margin: auto;
+  width: 100%;
+}
+
+#logo_section {
+  background-color: rgb(254, 251, 233, 0.8);
+  display: flex;
+  justify-content: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.highlight {
+  border: 3px #F5C6CF solid;
+}
+
+
+/****************** Footer style *******************/
+
+footer {
+  background-color: #FEFBE9;
+}
