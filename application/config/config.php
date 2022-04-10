@@ -35,7 +35,7 @@ $config['base_url'] = 'https://infs3202-73c50509.uqcloud.net/Virdemy';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

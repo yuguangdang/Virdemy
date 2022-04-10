@@ -14,7 +14,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
 
     <div>
-      <a class="navbar-brand" href="https://infs3202-73c50509.uqcloud.net/Virdemy/home">Virdemy</a>
+      <a class="navbar-brand" href="<?php echo base_url(); ?>/home">Virdemy</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -47,7 +47,7 @@
             <a href="<?php echo base_url(); ?>#"> <i class="fa-solid fa-cart-shopping"></i> </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>#"> <i class="fa-solid fa-user"></i> </a>
+            <a href="<?php echo base_url(); ?>profile"> <i class="fa-solid fa-user"></i> </a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>login/logout"> <i class="fa-solid fa-arrow-right-from-bracket"></i> </a>

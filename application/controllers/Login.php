@@ -1,11 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// this is to test github
 class login extends CI_Controller {
 
     public function __construct() {
         parent:: __construct();
+		$this->load->helper('send_email_helper');
+		$this->load->helper('string');
     }
 
 	public function index()
@@ -98,7 +99,7 @@ class login extends CI_Controller {
 		if (strlen($name) > 15 || strlen($name) < 2) {
 			$error_message = "<div class=\"alert alert-danger\" role=\"alert\"> Name has to be between 2 and 25 letters long. </div>";
 			$highlight_itme = "name";
-		} else if (!$email_check) {
+		} else if ($email_check) {
 			$error_message = "<div class=\"alert alert-danger\" role=\"alert\"> This email has been registered. </div>";
 			$highlight_itme = "email";
 		} else if (strlen($password) < 5) {
@@ -126,13 +127,18 @@ class login extends CI_Controller {
 			);
 			$this->load->view('login', $data);
 		} else {
+			// Register user
+			$verify_code = random_string('alnum', 12);
 			$user = array(
 				'name' => str_replace(' ', '', $name), 
 				'email' => str_replace(' ', '',$email), 
 				'password' => md5($password), 
+				'verify_code' => $verify_code,
+				'active' => false
 			);
-	
-			$this->user_model->register($user);
+			
+			// Render login
+			$user_id = $this->user_model->register($user);
 			$sucess_message = "<div class=\"alert alert-success\" role=\"alert\"> Registered successfully. Now please login! </div> ";
 			$data = array(
 				'success' => $sucess_message, 
@@ -144,16 +150,70 @@ class login extends CI_Controller {
 				'password' => "",
 				'confirmPassword' => "",
 			);
+			$this->load->view('login', $data);
 
+			// Sending verification email
 			$subject = "Virdemy - Email address verification";
 			$message = '<html><body>' . '<p">Hi, ' . $name .'</p>';
-			$message .= '<p>Please verify your email address <a href="https://infs3202-73c50509.uqcloud.net/Virdemy/home">here</a>.</p>';
+			$verify_link = base_url() . 'login/verify_email/' . $user_id . '/' . $verify_code;
+			$message .= '<p>Please verify your email address <a href=' . $verify_link. '>here</a>.</p>';
 			$message .= '</body></html>';
-			
-			$this->load->helper('send_email_helper');
-			$this->load->view('login', $data);
 			send_email($email, $name, $subject, $message);
 		}
+	}
+
+	public function verify_email() {
+		$id =  $this->uri->segment(3);
+        $code = $this->uri->segment(4);
+		$user_data = $this->user_model->get_user_by_id($id);
+
+		if($user_data['verify_code'] == $code){
+            //update user active status
+            $user_data['active'] = true;
+            $query = $this->user_model->activate($user_data, $id);
+ 
+            if($query){
+                $this->session->set_flashdata('message', 'User account verified successfully');
+            }
+            else{
+                $this->session->set_flashdata('error', 'Something went wrong when verifying account');
+            }
+        }
+        else{
+            $this->session->set_flashdata('error', "Cannot verify account as code didn't match");
+        }
+		redirect(base_url(). 'profile');
+	}
+
+	public function render_reset_password() {
+		$this->load->view('template/header');
+		$this->load->view('reset_password');
+		$this->load->view('template/footer');
+
+	}
+
+	public function send_reset_email() {
+		$email = $this->input->post('email');
+		$email_check = $this->user_model->email_check($email);
+
+		if ($email_check) {
+			$token = random_string('alnum', 8);
+
+			$user_data = $this->user_model->get_user_by_email($email);
+			$subject = "Virdemy - Email address verification";
+			$name = $user_data['name'];
+			$message = '<html><body>' . '<p">Hi, ' . $name .'</p>';
+			$reset_link = base_url() . "login/send_reset_email/" . $token;
+			$message .= '<p>Click this <a href=' .$reset_link . '>link</a> to set a new password.</P>';
+			$message .= '</body></html>';
+			send_email($email, $name, $subject, $message);
+		} else {
+			echo $email;
+		}
+
+		$this->load->view('template/header');
+		$this->load->view('reset_password');
+		$this->load->view('template/footer');
 	}
 }
 
