@@ -170,7 +170,7 @@ class login extends CI_Controller {
 		if($user_data['verify_code'] == $code){
             //update user active status
             $user_data['active'] = true;
-            $query = $this->user_model->activate($user_data, $id);
+            $query = $this->user_model->update_user_data($user_data, $id);
  
             if($query){
                 $this->session->set_flashdata('message', 'User account verified successfully');
@@ -185,11 +185,10 @@ class login extends CI_Controller {
 		redirect(base_url(). 'profile');
 	}
 
-	public function render_reset_password() {
+	public function change_password() {
 		$this->load->view('template/header');
-		$this->load->view('reset_password');
+		$this->load->view('change_password');
 		$this->load->view('template/footer');
-
 	}
 
 	public function send_reset_email() {
@@ -197,23 +196,74 @@ class login extends CI_Controller {
 		$email_check = $this->user_model->email_check($email);
 
 		if ($email_check) {
-			$token = random_string('alnum', 8);
-
+			$token = random_string('alnum', 12);
 			$user_data = $this->user_model->get_user_by_email($email);
-			$subject = "Virdemy - Email address verification";
+			$user_data['reset_token'] = $token;
+			$query = $this->user_model->update_user_data($user_data, $user_data['id']);
+
+			// Sending password reset link via email
+			$subject = "Virdemy - Change password";
 			$name = $user_data['name'];
+			$reset_link = base_url() . "login/password_reset_page/" . $token;
 			$message = '<html><body>' . '<p">Hi, ' . $name .'</p>';
-			$reset_link = base_url() . "login/send_reset_email/" . $token;
 			$message .= '<p>Click this <a href=' .$reset_link . '>link</a> to set a new password.</P>';
 			$message .= '</body></html>';
 			send_email($email, $name, $subject, $message);
-		} else {
-			echo $email;
-		}
 
+			$this->session->set_flashdata('message', 'Please check your email to reset the password.');
+			$this->load->view('template/header');
+			$this->load->view('change_password');
+			$this->load->view('template/footer');
+		} else {
+			$this->session->set_flashdata('error', 'The email address does not exist.');
+			$this->load->view('template/header');
+			$this->load->view('change_password');
+			$this->load->view('template/footer');
+		}
+	}
+
+	public function password_reset_page() {
+		$this->session->set_flashdata('message', '');
 		$this->load->view('template/header');
-		$this->load->view('reset_password');
+		$data = array('token' => $this->uri->segment(3));
+		$this->load->view('password_reset_page', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function reset_password() {
+		$password = str_replace(' ', '', strip_tags($this->input->post('password')));
+		$confirmPassword = str_replace(' ', '', strip_tags($this->input->post('confirmPassword')));
+		$token = $this->input->post('token');
+		$user_data = $this->user_model->get_user_by_token($token);
+
+		if (strlen($password) < 5) {
+			$this->session->set_flashdata('error', 'Password has to be at least 5 characters');
+			redirect('login/password_reset_page/' . $token, 'refresh');
+		} else if ($password != $confirmPassword) {
+			$this->session->set_flashdata('error', 'Password and confirm password does not match.');
+			redirect('login/password_reset_page/' . $token, 'refresh');
+		} else {
+			$user_data['password'] = md5($password);
+			$query = $this->user_model->update_user_data($user_data, $user_data['id']);
+			if ($query) {
+				$success_message = "<div class=\"alert alert-success\" role=\"alert\"> Successfully set a new password. Now please login! </div> ";
+				$data = array(
+					'success' => $success_message, 
+					'error' => "",
+					'state' => 'login',
+					'highlightItem' => "",
+					'name' => "",
+					'email' => "",
+					'password' => "",
+					'confirmPassword' => "",
+				);
+				$this->load->view('template/header');
+				$this->load->view('login', $data);
+				$this->load->view('template/footer');
+			} else {
+				echo "cannot update password";
+			}
+		}
 	}
 }
 

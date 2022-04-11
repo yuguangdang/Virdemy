@@ -44,7 +44,12 @@ class User_model extends CI_Model {
 		return $query->row_array();
     }
 
-    public function activate($data, $id){
+    public function get_user_by_token($token) {
+        $query = $this->db->get_where('user',array('reset_token'=>$token));
+		return $query->row_array();
+    }
+
+    public function update_user_data($data, $id){
 		$this->db->where('user.id', $id);
 		return $this->db->update('user', $data);
 	}
