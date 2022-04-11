@@ -1,0 +1,22 @@
+
+.profile-section {
+    padding: 2rem;
+}
+
+.profile-section h3 {
+    color: #2e5e4e;
+}
+
+#verified {
+    background-color: #2e5e4e;
+    color: #fefbe9;
+    border-radius: 3px;
+    padding: 0.2rem;
+}
+
+#not-Verified {
+    background-color: #b62c45;
+    color: #fefbe9;
+    border-radius: 3px;
+    padding: 0.2rem;
+}
