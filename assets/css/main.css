@@ -2,6 +2,16 @@ body {
   font-size: 0.8rem;
 }
 
+p {
+  margin: 0;
+}
+
+hr {
+  border: none;
+  height: 1.5px;
+  background-color: #2e5e4e; 
+}
+
 .main {
   background-color: #E1EEDD;
   height: 100vh;
@@ -52,19 +62,34 @@ body {
   margin-right: 1rem;
 }
 
+.success-message {
+  background-color: rgb(33, 202, 146, 0.8);
+  color: #FEFBE9;
+  padding: 0.2rem 0.3rem;
+  border-radius: 3px;
+  
+}
+
+.error-message {
+  background-color: rgba(197, 63, 63, 0.8);
+  color: #FEFBE9;
+  padding: 0.2rem 0.3rem;
+  border-radius: 3px;
+}
 
 /****************** Login style *******************/
 
 .login_page {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-image: url("../img/background.webp");
 	background-size:cover;
   height: 100%;
 }
 
 .login_box {
+  margin-top: 4rem;
   width: 40%;
   border: 2px solid #2e5e4e;
   border-radius: 10px;
@@ -83,7 +108,7 @@ body {
   width: 100%;
 }
 
-#logo_section {
+.logo_section {
   background-color: rgb(254, 251, 233, 0.8);
   display: flex;
   justify-content: center;

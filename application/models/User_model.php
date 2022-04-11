@@ -23,14 +23,35 @@ class User_model extends CI_Model {
         $query=$this->db->get();
         
         if($query->num_rows()>0){
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
     }
 
     public function register($user) {
-        $this->db->insert('user', $user);      
+        $this->db->insert('user', $user); 
+        return $this->db->insert_id();    
     }
+
+    public function get_user_by_email($email) {
+        $query = $this->db->get_where('user',array('email'=>$email));
+		return $query->row_array();
+    }
+
+    public function get_user_by_id($id) {
+        $query = $this->db->get_where('user',array('id'=>$id));
+		return $query->row_array();
+    }
+
+    public function get_user_by_token($token) {
+        $query = $this->db->get_where('user',array('reset_token'=>$token));
+		return $query->row_array();
+    }
+
+    public function update_user_data($data, $id){
+		$this->db->where('user.id', $id);
+		return $this->db->update('user', $data);
+	}
 }
 ?>

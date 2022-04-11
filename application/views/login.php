@@ -2,8 +2,8 @@
 
 <div class="login_page">
 	<div class="login_box">
-		<div id="logo_section">
-			<a class="navbar-brand" href="https://infs3202-73c50509.uqcloud.net/Virdemy/home">Virdemy</a>
+		<div class="logo_section">
+			<a class="navbar-brand" href="<?php echo base_url(); ?>/home">Virdemy</a>
 		</div>
 		<div id="first" style="display: <?php echo ($state == 'register')? 'none' : '' ?>">
 			<?php echo form_open(base_url() . 'login/check_login'); ?>
@@ -27,7 +27,7 @@
 			</div>
 			<div class="clearfix">
 				<label class="float-left form-check-label"><input type="checkbox" name="remember"> Remember me</label>
-				<a href="#" class="float-right">Forgot Password?</a>
+				<a href="<?php echo base_url(); ?>login/change_password" class="float-right">Forgot Password?</a>
 			</div>
 			<hr>
 			<a href="#" id="signup" class="signup">Need an account? Register here!</a>
