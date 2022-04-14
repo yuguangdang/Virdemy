@@ -1,5 +1,6 @@
 body {
   font-size: 0.8rem;
+  background-color: #f3e9dd;
 }
 
 p {
@@ -12,9 +13,17 @@ hr {
   background-color: #2e5e4e; 
 }
 
+label {
+  text-align: left;
+  clear: both;
+  float:left;
+  margin-left: 1rem;
+}
+
 .main {
-  background-color: #E1EEDD;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .button {
@@ -77,6 +86,9 @@ hr {
   border-radius: 3px;
 }
 
+.form-group {
+  text-align: center;
+}
 /****************** Login style *******************/
 
 .login_page {
@@ -88,22 +100,22 @@ hr {
   height: 100%;
 }
 
-.login_box {
-  margin-top: 4rem;
+.form_style {
+  margin: 4rem 0;
   width: 40%;
   border: 2px solid #2e5e4e;
   border-radius: 10px;
   background-color: rgb(225, 238, 221, 0.95);
 }
 
-.login_box form {
-  padding: 1rem;
+.form_style form {
+  padding: 1rem 1rem 0 1rem;
   margin: 0;
   border-radius: 0 0 10px 10px;
   text-align: center;
 }
 
-.login_box form button {
+.form_style form button {
   margin: auto;
   width: 100%;
 }
@@ -120,8 +132,16 @@ hr {
 }
 
 
+/****************** Home page *******************/
+
+.course_card {
+  box-shadow: 5px 10px 8px #888888;
+}
+
+
 /****************** Footer style *******************/
 
 footer {
   background-color: #FEFBE9;
+  margin-top: 1rem;
 }

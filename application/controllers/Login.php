@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class login extends CI_Controller {
+class Login extends CI_Controller {
 
     public function __construct() {
         parent:: __construct();
@@ -24,7 +24,7 @@ class login extends CI_Controller {
 		$this->load->view('template/header');
 		if (!$this->session->userdata('logged_in'))//check if user already login
 		{
-			$this->load->view('login', $data); //if user has not login ask user to login
+			$this->load->view('auth/login', $data); //if user has not login ask user to login
 		}else{
 			$this->load->view('home'); //if user already logined show main page
 		}
@@ -52,8 +52,10 @@ class login extends CI_Controller {
 
 		if(!$this->session->userdata('logged_in')){	//Check if user already login
 			if ( $this->user_model->login($email, $password) )//check username and password
-			{
+			{	
+				$user_data = $this->user_model->get_user_by_email($email);
 				$user_data = array(
+					'user_id' => $user_data['user_id'],
 					'email' => $email,
 					'logged_in' => true 	//create session variable
 				);
@@ -65,7 +67,7 @@ class login extends CI_Controller {
 				$this->session->set_userdata($user_data); //set user status to login in session
 				redirect('home'); // direct user home page
 			} else {
-				$this->load->view('login', $data);	//if username password incorrect, show error msg and ask user to login
+				$this->load->view('auth/login', $data);	//if username password incorrect, show error msg and ask user to login
 			}
 		} else {
 			{
@@ -125,7 +127,7 @@ class login extends CI_Controller {
 				'password' => $password,
 				'confirmPassword' => $confirmPassword
 			);
-			$this->load->view('login', $data);
+			$this->load->view('auth/login', $data);
 		} else {
 			// Register user
 			$verify_code = random_string('alnum', 12);
@@ -150,7 +152,7 @@ class login extends CI_Controller {
 				'password' => "",
 				'confirmPassword' => "",
 			);
-			$this->load->view('login', $data);
+			$this->load->view('auth/login', $data);
 
 			// Sending verification email
 			$subject = "Virdemy - Email address verification";
@@ -187,7 +189,7 @@ class login extends CI_Controller {
 
 	public function change_password() {
 		$this->load->view('template/header');
-		$this->load->view('change_password');
+		$this->load->view('auth/change_password');
 		$this->load->view('template/footer');
 	}
 
@@ -199,7 +201,7 @@ class login extends CI_Controller {
 			$token = random_string('alnum', 12);
 			$user_data = $this->user_model->get_user_by_email($email);
 			$user_data['reset_token'] = $token;
-			$query = $this->user_model->update_user_data($user_data, $user_data['id']);
+			$query = $this->user_model->update_user_data($user_data, $user_data['user_id']);
 
 			// Sending password reset link via email
 			$subject = "Virdemy - Change password";
@@ -212,12 +214,12 @@ class login extends CI_Controller {
 
 			$this->session->set_flashdata('message', 'Please check your email to reset the password.');
 			$this->load->view('template/header');
-			$this->load->view('change_password');
+			$this->load->view('auth/change_password');
 			$this->load->view('template/footer');
 		} else {
 			$this->session->set_flashdata('error', 'The email address does not exist.');
 			$this->load->view('template/header');
-			$this->load->view('change_password');
+			$this->load->view('auth/change_password');
 			$this->load->view('template/footer');
 		}
 	}
@@ -226,7 +228,7 @@ class login extends CI_Controller {
 		$this->session->set_flashdata('message', '');
 		$this->load->view('template/header');
 		$data = array('token' => $this->uri->segment(3));
-		$this->load->view('password_reset_page', $data);
+		$this->load->view('auth/password_reset_page', $data);
 		$this->load->view('template/footer');
 	}
 
@@ -244,7 +246,7 @@ class login extends CI_Controller {
 			redirect('login/password_reset_page/' . $token, 'refresh');
 		} else {
 			$user_data['password'] = md5($password);
-			$query = $this->user_model->update_user_data($user_data, $user_data['id']);
+			$query = $this->user_model->update_user_data($user_data, $user_data['user_id']);
 			if ($query) {
 				$success_message = "<div class=\"alert alert-success\" role=\"alert\"> Successfully set a new password. Now please login! </div> ";
 				$data = array(
@@ -258,7 +260,7 @@ class login extends CI_Controller {
 					'confirmPassword' => "",
 				);
 				$this->load->view('template/header');
-				$this->load->view('login', $data);
+				$this->load->view('auth/login', $data);
 				$this->load->view('template/footer');
 			} else {
 				echo "cannot update password";

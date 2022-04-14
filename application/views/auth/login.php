@@ -1,7 +1,7 @@
 <script src="<?php echo base_url(); ?>/assets/js/register.js"></script>
 
 <div class="login_page">
-	<div class="login_box">
+	<div class="form_style">
 		<div class="logo_section">
 			<a class="navbar-brand" href="<?php echo base_url(); ?>/home">Virdemy</a>
 		</div>

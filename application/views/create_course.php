@@ -1,0 +1,27 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/create_course.css">
+
+
+
+<div class="main">
+    <div class="form_style form_style-course">
+        <div class="logo_section">
+            <a class="navbar-brand" href="#">Virdemy</a>
+        </div>
+        <div>
+            <?php echo form_open_multipart(base_url() . 'course/create_course'); ?>
+            <div class="form-group row">
+                <label class="col-3" for="">Course title</label>
+                <input class="col-8" type="text" class="form-control" required="required" name="courseTitle" >
+            </div>
+            <div class="form-group row">
+                <label class="col-3" for="">Course description</label>
+                <textarea class="col-8" name="description" id="" cols="30" rows="5" ></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="upload" class="button">Create course</button>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
+    </div>
+</div>
+

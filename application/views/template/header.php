@@ -35,7 +35,7 @@
         <?php endif; ?>
         <?php if ($this->session->userdata('logged_in')) : ?>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>#"> Create Course </a>
+            <a href="<?php echo base_url(); ?>course/render_create_course"> Create Course </a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>#"> My Learning </a>

@@ -40,7 +40,7 @@ class User_model extends CI_Model {
     }
 
     public function get_user_by_id($id) {
-        $query = $this->db->get_where('user',array('id'=>$id));
+        $query = $this->db->get_where('user',array('user_id'=>$id));
 		return $query->row_array();
     }
 
@@ -50,7 +50,7 @@ class User_model extends CI_Model {
     }
 
     public function update_user_data($data, $id){
-		$this->db->where('user.id', $id);
+		$this->db->where('user.user_id', $id);
 		return $this->db->update('user', $data);
 	}
 }
