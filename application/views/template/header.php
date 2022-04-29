@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+  <div id="load"></div>
   <nav class="navbar navbar-expand-lg navbar-light">
 
     <div>
@@ -19,10 +19,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <form class="form-inline my-0 py-0 my-lg-0">
-        <input class="form-control input-sm mr-2 ml-2" type="search" placeholder="Search course" aria-label="Search">
-        <button class="button mr-2" type="submit">Search</button>
-      </form>
+      <?php echo form_open(base_url() . 'home/search', array(
+        'class' => 'form-inline my-0 py-0 my-lg-0'
+      )); ?>
+      <input class="form-control input-sm mr-2 ml-2" type="search" placeholder="Search course" name="query" aria-label="Search" value="<?php (isset($query))? $query : '' ?>">
+      <input class="button" type="submit" value="Search" />
+      <?php echo form_close(); ?>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,7 +37,7 @@
         <?php endif; ?>
         <?php if ($this->session->userdata('logged_in')) : ?>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>course/render_create_course"> Create Course </a>
+            <a class="<?php echo ($page === 'create_course')? 'active' : '' ?>" href="<?php echo base_url(); ?>course/render_create_course"> Create Course </a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>#"> My Learning </a>
@@ -47,7 +49,7 @@
             <a href="<?php echo base_url(); ?>#"> <i class="fa-solid fa-cart-shopping"></i> </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>profile"> <i class="fa-solid fa-user"></i> </a>
+            <a class="<?php echo ($page === 'user')? 'active' : '' ?>" href="<?php echo base_url(); ?>profile"> <i class="fa-solid fa-user"></i> </a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>login/logout"> <i class="fa-solid fa-arrow-right-from-bracket"></i> </a>

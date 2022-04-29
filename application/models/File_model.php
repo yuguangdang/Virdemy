@@ -26,26 +26,20 @@
     }
 
     public function get_file($file_table, $course_id){
-
         $this->db->select("*");
         $this->db->from($file_table);
         $this->db->where('course_id', $course_id);
         return $this->db->get();
     }
 
-    function fetch_data($query)
-    {
-        if($query == '')
-        {
-            return null;
-        }else{
-            $this->db->select("*");
-            $this->db->from("files");
-            $this->db->like('filename', $query);
-            $this->db->or_like('username', $query);
-            $this->db->order_by('filename', 'DESC');
-            return $this->db->get();
-        }
+    public function get_video_by_id($video_id){
+        $this->db->select("*");
+        $this->db->from('course_video');
+        $this->db->where('video_id', $video_id);
+        return $this->db->get()->row_array();
     }
 
+    public function delete_video_by_id($video_id) {
+        $this->db->delete('course_video', array('video_id' => $video_id));
+    }
 }

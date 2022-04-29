@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/create_course.css">
 
-<div class="main">
+<div class="main background_image">
     <div class="form_style form_style-course">
         <div class="logo_section">
             <a class="navbar-brand" href="#">Virdemy</a>
@@ -9,8 +9,8 @@
             <?php echo form_open_multipart(base_url() . 'course/upload_course_img'); ?>
             <div class="form-group row">
                 <label class="col-3" for="">Course picture</label>
-                <input class="col-5" type="file" name="userfile" size="20" />
-                <input class="col-3 button" type="submit" value="upload" />
+                <input class="col-5" type="file" name="userfile" size="20" required="required" />
+                <input class="col-3 button upload" type="submit" value="upload" />
             </div>
             <input hidden type="text" name="course_id" value=<?php echo $course_id ?>>
             <?php echo form_close(); ?>
@@ -27,8 +27,8 @@
             <?php echo form_open_multipart(base_url() . 'course/upload_course_video'); ?>
             <div class="form-group row">
                 <label class="col-3" for="">Course videos</label>
-                <input class="col-5" type="file" name="userfile" size="20" />
-                <input class="col-3 button" type="submit" value="upload" />
+                <input class="col-5" type="file" name="userfile" size="20" required="required" />
+                <input class="col-3 button upload" type="submit" value="upload" />
             </div>
             <input hidden type="text" name="course_id" value=<?php echo $course_id ?>>
             <?php echo form_close(); ?>
@@ -50,3 +50,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('form').each(function() {
+            var form = this;
+            form.addEventListener('submit', function() {
+                $("#load").show();
+            })
+        })
+    });
+</script>

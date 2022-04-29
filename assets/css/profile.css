@@ -8,15 +8,17 @@
 }
 
 #verified {
-    background-color: #2e5e4e;
+    background-color: #58eebc;
     color: #fefbe9;
-    border-radius: 3px;
+    border-radius: 5px 10px 15px 20px;
     padding: 0.2rem;
+    box-shadow: 5px 5px 5px #888888;
 }
 
 #not-Verified {
     background-color: #b62c45;
     color: #fefbe9;
-    border-radius: 3px;
+    border-radius: 5px 10px 15px 20px;
     padding: 0.2rem;
+    box-shadow: 5px 5px 5px #888888;
 }

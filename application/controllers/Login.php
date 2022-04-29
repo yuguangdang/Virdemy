@@ -20,8 +20,11 @@ class Login extends CI_Controller {
 			'email' => "",
 			'password' => "",
 			'confirmPassword' => "",
+			'query'=>''
 		);
-		$this->load->view('template/header');
+
+		$this->load->view('template/header', $data);
+
 		if (!$this->session->userdata('logged_in'))//check if user already login
 		{
 			$this->load->view('auth/login', $data); //if user has not login ask user to login
@@ -86,12 +89,12 @@ class Login extends CI_Controller {
 
 
 	public function register() {
-
-		$this->load->view('template/header');
+		$page = array('page' => '', );
+		$this->load->view('template/header', $page);
 
 		// Data sanitation
 		$error_message = "";
-		$name = str_replace(' ', '', strip_tags($this->input->post('name')));
+		$name = strip_tags($this->input->post('name'));
 		$email = str_replace(' ', '', strip_tags($this->input->post('email')));
 		$password = str_replace(' ', '', strip_tags($this->input->post('password')));
 		$confirmPassword = str_replace(' ', '', strip_tags($this->input->post('confirmPassword')));
@@ -188,7 +191,8 @@ class Login extends CI_Controller {
 	}
 
 	public function change_password() {
-		$this->load->view('template/header');
+		$page = array('page' => '', );
+		$this->load->view('template/header', $page);
 		$this->load->view('auth/change_password');
 		$this->load->view('template/footer');
 	}
@@ -213,12 +217,14 @@ class Login extends CI_Controller {
 			send_email($email, $name, $subject, $message);
 
 			$this->session->set_flashdata('message', 'Please check your email to reset the password.');
-			$this->load->view('template/header');
+			$page = array('page' => '', );
+			$this->load->view('template/header', $page);
 			$this->load->view('auth/change_password');
 			$this->load->view('template/footer');
 		} else {
 			$this->session->set_flashdata('error', 'The email address does not exist.');
-			$this->load->view('template/header');
+			$page = array('page' => '', );
+			$this->load->view('template/header', $page);
 			$this->load->view('auth/change_password');
 			$this->load->view('template/footer');
 		}
@@ -226,7 +232,8 @@ class Login extends CI_Controller {
 
 	public function password_reset_page() {
 		$this->session->set_flashdata('message', '');
-		$this->load->view('template/header');
+		$page = array('page' => '', );
+		$this->load->view('template/header', $page);
 		$data = array('token' => $this->uri->segment(3));
 		$this->load->view('auth/password_reset_page', $data);
 		$this->load->view('template/footer');
@@ -259,7 +266,8 @@ class Login extends CI_Controller {
 					'password' => "",
 					'confirmPassword' => "",
 				);
-				$this->load->view('template/header');
+				$page = array('page' => '', );
+				$this->load->view('template/header', $page);
 				$this->load->view('auth/login', $data);
 				$this->load->view('template/footer');
 			} else {
