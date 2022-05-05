@@ -24,6 +24,10 @@ label {
   margin-left: 1rem;
 }
 
+ul {  
+  list-style-type: none;  
+  } 
+
 .main {
   display: flex;
   justify-content: center;
@@ -172,6 +176,12 @@ button[disabled]{
   background-color: #f6c453;
 }
 
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+
 /****************** Login style *******************/
 
 .login_page {
@@ -234,6 +244,23 @@ button[disabled]{
   max-height: 220px;
 }
 
+/****************** Search box auto-completion *******************/
+
+#auto_complete {
+  border: 1px dotted #ccc;
+  padding: 3px;
+}
+#auto_complete ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#auto_complete ul li {
+  padding: 5px 0;
+}
+#auto_complete ul li:hover {
+  background: #eee;
+}
 
 /****************** Footer style *******************/
 

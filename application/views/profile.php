@@ -46,7 +46,7 @@
                 <br><span class="error-message"><?php echo $this->session->flashdata('error'); ?></span><br>
             <?php } ?>
             <br>
-            <p>Password: ********  <span><a class="button p-1" href="login/change_password" style="color: #f6c453;">Change password</a></span> </p><br> 
+            <p>Password: ********  <span><a class="button p-1" href="login/change_password">Change password</a></span> </p><br> 
             <button class="button" id="show_location">Show my location</button>
             <hr>
             <div id="location">

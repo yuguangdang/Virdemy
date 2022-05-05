@@ -37,19 +37,16 @@
         <?php endif; ?>
         <?php if ($this->session->userdata('logged_in')) : ?>
           <li class="nav-item">
-            <a class="<?php echo ($page === 'create_course')? 'active' : '' ?>" href="<?php echo base_url(); ?>course/render_create_course"> Create Course </a>
+            <a class="<?php echo (isset($page) && $page === 'create_course')? 'active' : '' ?>" href="<?php echo base_url(); ?>course/render_create_course"> Create Course </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>#"> My Learning </a>
+            <a class="<?php echo (isset($page) && $page === 'learning')? 'active' : '' ?>" href="<?php echo base_url(); ?>learning"> My Learning </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>#"> <i class="fa-solid fa-heart"></i> </a>
+            <a class="<?php echo (isset($page) && $page === 'cart')? 'active' : '' ?>" href="<?php echo base_url() . 'cart'; ?>"> <i class="fa-solid fa-cart-shopping"></i> </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>#"> <i class="fa-solid fa-cart-shopping"></i> </a>
-          </li>
-          <li class="nav-item">
-            <a class="<?php echo ($page === 'user')? 'active' : '' ?>" href="<?php echo base_url(); ?>profile"> <i class="fa-solid fa-user"></i> </a>
+            <a class="<?php echo (isset($page) && $page === 'user')? 'active' : '' ?>" href="<?php echo base_url(); ?>profile"> <i class="fa-solid fa-user"></i> </a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>login/logout"> <i class="fa-solid fa-arrow-right-from-bracket"></i> </a>

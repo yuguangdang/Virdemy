@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$config['stripe_key'] = 'pk_test_51KU7EeG3TFFxX43IpSTPF4CXj7MmRuT90XQcPEpx33Cmyq5vfBWqnwtPv7X8B3Z4TZWS3VLI92LTLmEN2TdAw6aE00u30eVJAT';
+
+$config['stripe_secret'] = 'sk_test_51KU7EeG3TFFxX43I9FfTuglQZTClucvmAE13KU0dktD7nFVtEEqC1azcCfynyhvM7sQUX2WoKoyE3FBxhhAJcblZ007eDhFnyU';
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -100,7 +104,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = True;
 
 /*
 |--------------------------------------------------------------------------

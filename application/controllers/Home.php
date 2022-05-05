@@ -11,20 +11,25 @@ class Home extends CI_Controller {
 
     public function index()
 	{
+        // echo $this->session->userdata("email");
         $query = $this->course_model->get_courses();
         $courses = [];
         foreach ($query->result() as $row) {
             // Get course picture file path
             $course_id = $row->course_id;
             $course_pic = $this->file_model->get_file($file_table = 'course_image', $course_id);
-            $pic_string = $course_pic->row()->path;
-            $pic_path = explode("/",$pic_string);
+            if (is_object($course_pic->row())) {
+                $pic_name = $course_pic->row()->filename;
+            } else {
+                $pic_name = 'no-image.jpeg';
+            }
+
             // Get course creator name
             $creator_id = $row->creator_id;
             $user_data = $this->user_model->get_user_by_id($creator_id);
             $course = array(
                 'course_id' => $course_id,
-                'course_pic' => base_url(). "uploads/" .end($pic_path),
+                'course_pic' => base_url(). "uploads/" . $pic_name,
                 'course_name' => $row->course_name, 
                 'description' => $row->course_description, 
                 'creator' => $user_data['name'],
@@ -32,11 +37,6 @@ class Home extends CI_Controller {
             );
             array_push($courses,$course);
             }
-
-            // print "<pre>";
-            // print_r($courses);
-            // print "</pre>";
-
             
 		$data = array('courses' => $courses, 'query'=>'', 'page'=>'home');
 		$this->load->view('template/header', $data);

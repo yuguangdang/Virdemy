@@ -20,12 +20,15 @@ class profile extends CI_Controller {
             // Get course picture file path
             $course_id = $row->course_id;
             $course_pic = $this->file_model->get_file($file_table = 'course_image', $course_id);
-            $pic_string = $course_pic->row()->path;
-            $pic_path = explode("/",$pic_string);
+            if (is_object($course_pic->row())) {
+                $pic_name = $course_pic->row()->filename;
+            } else {
+                $pic_name = 'no-image.jpeg';
+            }
             // Get course creator name
             $course = array(
                 'course_id' => $course_id,
-                'course_pic' => base_url(). "uploads/" .end($pic_path),
+                'course_pic' => base_url(). "uploads/" . $pic_name,
                 'course_name' => $row->course_name, 
             );
             array_push($courses,$course);
@@ -52,5 +55,3 @@ class profile extends CI_Controller {
         redirect("profile");
     }
 }
-
-?>
