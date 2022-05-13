@@ -8,6 +8,7 @@ class Learning extends CI_Controller {
 		$this->load->model('file_model');
 		$this->load->model('user_model');
 		$this->load->model('learning_model');
+		$this->load->model('rating_model');
     }
 
     public function index() {
@@ -19,6 +20,9 @@ class Learning extends CI_Controller {
         foreach ($items as $row) {
             // Get course picture file path
             $course_id = $row['course_id'];
+            $rating = $this->rating_model->get_average_rating($course_id)[0]['average'];
+            $rating_count = $this->rating_model->get_rating_num($course_id)[0]['count'];
+            
             $course_data = $this->course_model->get_course_by_id($course_id);
             $course_pic = $this->file_model->get_file($file_table = 'course_image', $course_id);
             if (is_object($course_pic->row())) {
@@ -31,6 +35,8 @@ class Learning extends CI_Controller {
                 'course_id' => $course_id,
                 'course_pic' => base_url(). "uploads/" . $pic_name,
                 'course_name' => $course_data->course_name, 
+                'course_rating' => $rating,
+                'rating_count' => $rating_count
             );
             array_push($courses,$course);
         }

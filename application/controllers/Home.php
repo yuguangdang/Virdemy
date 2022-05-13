@@ -7,6 +7,7 @@ class Home extends CI_Controller {
 		$this->load->model('course_model');
 		$this->load->model('file_model');
         $this->load->model('user_model');
+		$this->load->model('rating_model');
     }
 
     public function index()
@@ -24,6 +25,9 @@ class Home extends CI_Controller {
                 $pic_name = 'no-image.jpeg';
             }
 
+            $rating = $this->rating_model->get_average_rating($course_id)[0]['average'];
+            $rating_count = $this->rating_model->get_rating_num($course_id)[0]['count'];
+
             // Get course creator name
             $creator_id = $row->creator_id;
             $user_data = $this->user_model->get_user_by_id($creator_id);
@@ -34,6 +38,8 @@ class Home extends CI_Controller {
                 'description' => $row->course_description, 
                 'creator' => $user_data['name'],
                 'price' => $row->price, 
+                'course_rating' => $rating,
+                'rating_count' => $rating_count
             );
             array_push($courses,$course);
             }

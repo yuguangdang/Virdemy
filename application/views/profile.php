@@ -24,10 +24,10 @@
             <?php } ?>
 
             <?php echo form_open_multipart(base_url() . 'profile/change_username', array('class' => 'mt-3')); ?>
-                <label class="ml-0 mr-2" for="">Username:</label>
-                <input id="name_input" type="text" name="user_name" required="required" value="<?php echo $user_data['name']; ?> " readonly/>
-                <button id="edit" class="button" type="button">Edit</button>
-                <input id="save" class="button" type="submit" value="Save" style="display: none;"/>
+            <label class="ml-0 mr-2" for="">Username:</label>
+            <input id="name_input" type="text" name="user_name" required="required" value="<?php echo $user_data['name']; ?> " readonly />
+            <button id="edit" class="button" type="button">Edit</button>
+            <input id="save" class="button" type="submit" value="Save" style="display: none;" />
             <?php echo form_close(); ?>
 
             <!-- <p>Username: <?php echo $user_data['name']; ?></p><br> -->
@@ -46,7 +46,7 @@
                 <br><span class="error-message"><?php echo $this->session->flashdata('error'); ?></span><br>
             <?php } ?>
             <br>
-            <p>Password: ********  <span><a class="button p-1" href="login/change_password">Change password</a></span> </p><br> 
+            <p>Password: ******** <span><a class="button p-1" href="login/change_password">Change password</a></span> </p><br>
             <button class="button" id="show_location">Show my location</button>
             <hr>
             <div id="location">
@@ -61,13 +61,13 @@
                     <?php foreach ($courses as $course) { ?>
                         <div class="card col-4 px-1 my-1 py-1">
                             <img src=<?php echo $course['course_pic'] ?> class="card-img-top" alt="...">
-                                <div class='card-body' style="min-height: 9rem" >
-                                    <h6 class="card-title m-1"><?php echo $course['course_name'] ?></h6>
-                                    <div class="w-75">
+                            <div class='card-body d-flex flex-column' style="min-height: 9rem">
+                                <h6 class="card-title m-1"><?php echo $course['course_name'] ?></h6>
+                                <div class="w-75 mt-auto">
                                     <a href="<?php echo base_url() . 'course/course_edit/' . $course['course_id'] ?>"><button type="submit" class="button col-12 mt-1">Edit</button></a>
-                                    <a href="<?php echo base_url() . 'course/course_delete/' . $course['course_id'] ?>"><button type="submit" class="button-red col-12 mt-1">Delete</button></a>  
-                                    </div>
+                                    <a href="<?php echo base_url() . 'course/course_delete/' . $course['course_id'] ?>"><button type="submit" class="button-red col-12 mt-1">Delete</button></a>
                                 </div>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>

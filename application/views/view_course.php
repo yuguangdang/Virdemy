@@ -189,31 +189,6 @@
                 }
             })
             }
-
-            
-
-            
-            // $.ajax({
-            //     url:"<?php echo base_url(); ?>ajax/fetch",
-            //     method:"GET",
-            //     data:{query:query},
-            //     success: function(response) {
-            //         $('#result').html("");
-            //         if (response == "" ) {
-            //             $('#result').html(response);
-            //         }else{
-            //             var items = [];
-            //             var obj = JSON.parse(response);
-            //             $.each(obj, function(i, val) {
-            //                 items.push($("<h5>").text(val.question_title));
-            //                 items.push($("<p>").text(val.question_content));
-            //                 items.push($("<p style='color: gray'>").text(val.creator_name + "    " + val.create_time.substring(0, 7)));
-            //                 items.push($("<hr>"));
-            //             });
-            //             $('#result').append.apply($('#result'), items);
-            //         }
-            //     }
-            // })
         }
     });
 

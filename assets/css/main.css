@@ -227,16 +227,11 @@ button[disabled]{
 
 /****************** Home page *******************/
 
-.card-title {
-  margin-bottom: 2rem;
-}
-
 .course_card {
   box-shadow: 5px 10px 8px #888888;
 }
 
 .card-body div {
-  position: absolute;
   bottom: 1rem;
 }
 
@@ -268,3 +263,32 @@ footer {
   background-color: #FEFBE9;
   margin-top: 1rem;
 }
+
+/****************** Rating style *******************/
+
+#rating_modal .close{
+  font-size: 40px;
+  color: #fff;
+  opacity: 1;
+}
+
+#rating_modal .modal-header{
+  background: #d9534f;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}   
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;       
+}
+
+.star {
+  line-height:32px;
+  font-size:1.25em;
+  cursor: pointer;
+}
+
+.star-rating .fa-star{color: #c20001;}
+.star .fa-star{color: #c20001;}

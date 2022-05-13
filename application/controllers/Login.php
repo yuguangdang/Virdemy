@@ -39,7 +39,10 @@ class Login extends CI_Controller {
 		
 		$this->load->view('template/header');
 		$email = $this->input->post('email'); 
-		$password = md5($this->input->post('password')); 
+		$password = $this->input->post('password'); 
+		$hash = $this->user_model->get_user_by_email($email)['password'];
+		echo $hash;
+
 		$remember = $this->input->post('remember'); //getting remember checkbox from login form
 
 		$data = array(
@@ -54,7 +57,7 @@ class Login extends CI_Controller {
 		);
 
 		if(!$this->session->userdata('logged_in')){	//Check if user already login
-			if ( $this->user_model->login($email, $password) )//check username and password
+			if ( password_verify($password, $hash) )//check username and password
 			{	
 				$user_data = $this->user_model->get_user_by_email($email);
 				$user_data = array(
@@ -77,7 +80,7 @@ class Login extends CI_Controller {
 				redirect('home'); //if user already logined direct user to home page
 			}
 		$this->load->view('template/footer');
-		}
+		}	
 	}
 
 	public function logout()
@@ -86,6 +89,17 @@ class Login extends CI_Controller {
 		session_destroy();
 		redirect('home'); // redirect user back to login
 	}
+
+	// public function generateSalt($max = 64) {
+	// 	$characterList = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?';
+	// 	$i = 0;
+	// 	$salt = '';
+	// 	while ($i < $max) {
+	// 		$salt .= $characterList{mt_rand(0, (strlen($characterList) - 1))};
+	// 		$i++;
+	// 	}
+	// 	return $salt;
+	// }
 
 
 	public function register() {
@@ -133,11 +147,17 @@ class Login extends CI_Controller {
 			$this->load->view('auth/login', $data);
 		} else {
 			// Register user
+			$hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+			// print "<pre>";
+			// print_r($psw);
+			// print "</pre>";
+
 			$verify_code = random_string('alnum', 12);
 			$user = array(
 				'name' => str_replace(' ', '', $name), 
 				'email' => str_replace(' ', '',$email), 
-				'password' => md5($password), 
+				'password' => $hash, 
 				'verify_code' => $verify_code,
 				'active' => false
 			);
@@ -252,7 +272,10 @@ class Login extends CI_Controller {
 			$this->session->set_flashdata('error', 'Password and confirm password does not match.');
 			redirect('login/password_reset_page/' . $token, 'refresh');
 		} else {
-			$user_data['password'] = md5($password);
+
+			$hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+			$user_data['password'] = $hash;
 			$query = $this->user_model->update_user_data($user_data, $user_data['user_id']);
 			if ($query) {
 				$success_message = "<div class=\"alert alert-success\" role=\"alert\"> Successfully set a new password. Now please login! </div> ";

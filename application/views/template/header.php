@@ -7,6 +7,8 @@
   <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
   <script src="https://kit.fontawesome.com/857b37eadb.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <link href='<?= base_url() ?>assets/bootstrap-star-rating/css/star-rating.min.css' type='text/css' rel='stylesheet'>
+  <script src='<?= base_url() ?>assets/bootstrap-star-rating/js/star-rating.min.js' type='text/javascript'></script>
 </head>
 
 <body>

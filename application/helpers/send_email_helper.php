@@ -22,6 +22,7 @@ if ( ! function_exists('send_email'))
 		$ci->email->to ($emailTo, $name);
 		$ci->email->subject ($subject);
 		$ci->email->message($message);
+		$ci->email->attach(base_url() . 'uploads/cards.png');
 		$ci->email->send();		
 	} 
 }
