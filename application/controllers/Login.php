@@ -67,7 +67,7 @@ class Login extends CI_Controller {
 				);
 				if($remember) { // if remember me is activated create cookie
 					set_cookie("email", $email, '300'); //set cookie username
-					set_cookie("password", $password, '300'); //set cookie password
+					set_cookie("password", md5($password), '300'); //set cookie password
 					set_cookie("remember", $remember, '300'); //set cookie remember
 				}
 				$this->session->set_userdata($user_data); //set user status to login in session
