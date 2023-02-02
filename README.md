@@ -1,6 +1,6 @@
 An online education website built with PHP CodeIgniter and MySQL. The app allows teachers to upload courses that students can buy, study and interact with each other.
 
-This project is the capstone of course INFS7202-Web Information Systems (The University of Queensland 2022) and it achieved full marks by implementing the below functionalities.
+This project is the capstone of the INFS7202-Web Information Systems course (University of Queensland 2022) and it achieved full marks by implementing the  functionalities below.
 
 1. Basic Level (2 mark each)
 
