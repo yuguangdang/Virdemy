@@ -1,56 +1,61 @@
-An online education website built with PHP CodeIgniter and MySQL. The app allows teachers to upload courses that students can buy, study and interact with each other.
+<h3> Project Overview </h3>
+
+Virdemy is an online learning platform, that is a web-based virtual learning environment and learning management system that allows the educator to upload learning content and students/learner to buy, view and download content.
 
 This project is the capstone of the INFS7202-Web Information Systems course (University of Queensland 2022) and it achieved full marks by implementing the  functionalities below.
 
-1. Basic Level (2 mark each)
+<h3>Functionalities</h3>
 
-● Remember me: retain the user’s login details even after the session expired.
+<h4>1. Basic Level (2 mark each)</h4>
 
-● Maintain scroll position of large HTML page when client return
+* Remember me: retain the user’s login details even after the session expired.
 
-● Continuously loading data when scrolling
+* Maintain scroll position of large HTML page when client return
 
-● Favourites or rating
+* Continuously loading data when scrolling
 
-● Search box autocompletion
+* Favourites and rating
 
-● Adding course (e.g., events, goods, pictures)
+* Search box autocompletion
 
-● Writing comments/reviews
+* Adding course content
 
-● User profile updating (e.g., email, phone number)
+* Writing comments/reviews
 
-● Display the user’s current location on a map
+* User profile updating (e.g., email, phone number)
 
-● Image processing (e.g., resize, compress and add watermarks to images)
+* Display the user’s current location on a map
 
-● Third-party API integration (e.g., sending an SMS to verify phonenumber using SMS API) ● Basic file uploading: (e.g., profile image, food pictures, thumbnails)
+* Image processing (adding watermarks to course coverpage)
 
-● Using drag and drop to choose files for uploading (prerequisite: basic fileuploading)
+* Google Map API integration
 
-● Multiple files uploading at the same time (prerequisite: basic file uploading)
+* Using drag and drop to choose files for uploading 
 
-● Web Security (e.g., captcha, password encryption, data sanitizing)
+* Multiple files uploading at the same time 
 
-● Online Payment Integration (e.g., PayPal, Stripe)
+* Web Security (password encryption, data sanitizing)
 
-● Image and PDF Manipulation (e.g., sending receipt)
+* Online Payment Integration (PayPal Rest API)
+
+* Image and PDF Manipulation (sending receipt)
 
 
-2. Advanced Level (3 mark each)
+<h4>2. Advanced Level (3 mark each)</h4>
 
-● Item Searching (e.g., images, meals or items, depending on the topic)
-○ Each resulting search item should contain a link which redirects to a detailpage
+- Course Searching
 
-● Email Verification
-○ After registration, an email should be sent to the user for the emailverification
-○ This feature could be implemented using a random token or a verificationcode
-○ The user should be able to see the verification status, i.e. email verified ornot
+  - Each resulting search course contains a link which redirects to a detailed course page
 
-● Forgot Password
-○ Take account of security concerns.
-○ This feature could be implemented using reset tokens or secret questions
 
-● Shopping Cart/Wishlist/Calendar
-○ The information should be stored in the database
-○ Users should be able to add and remove items from thecart/wishlist/calendar.
+- Email Verification
+  - After registration, an email is sent to the user for the email verification using a random token
+  - The user is able to see the verification status
+
+- Forgot Password
+  - Take account of security concerns
+  - Password resetting implemented using reset tokens
+
+- Shopping Cart
+  - The courses in the shopping cart are stored in the database
+  - Users are able to add and remove courses from the shopping cart.
